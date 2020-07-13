@@ -1,0 +1,29 @@
+<h1> Order Summary </h1>
+
+<table mat-table [dataSource]="coursesOrder" class="mat-elevation-z8" style="width: 100%;">
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title </th>
+    <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="price" style="text-align: right;">
+    <th mat-header-cell *matHeaderCellDef style="text-align: right;">Price</th>
+    <td mat-cell *matCellDef="let element" style="text-align: right;">{{ element.price | currency }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-card>
+  <mat-card-header fxLayoutAlign="end center">
+    <div class="row">
+      <mat-card-title class="card-container-left">Total: {{ getTotal() | currency }}</mat-card-title>
+      <div class="example-button-row">
+        <button mat-raised-button color="accent" (click)="OnCancel()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="OnPay()">Pay</button>
+      </div>
+    </div>
+  </mat-card-header>
+</mat-card>

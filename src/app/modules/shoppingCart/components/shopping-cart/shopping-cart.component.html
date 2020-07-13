@@ -1,0 +1,38 @@
+<table mat-table [dataSource]="coursesShopping" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let element" style="width: 20%;"> {{element.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element" style="width: 40%;"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Price</th>
+    <td mat-cell *matCellDef="let element" style="width: 20%; text-align: right;"> {{element.price | currency }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef style="text-align: right;">Actions </th>
+    <td mat-cell *matCellDef="let row" style="width: 20%; text-align: right;">
+      <button mat-icon-button matTooltip="Remove Course From your cart." class="iconbutton" color="warn" (click)="Delete(row)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-card>
+  <mat-card-header fxLayoutAlign="end center">
+    <div class="row">
+      <mat-card-title class="card-container-left">Total: {{ getTotal() | currency }}</mat-card-title>
+      <button mat-raised-button color="primary" *ngIf="getTotal() > 0" style="width: 100%" (click)="OnNext()">Next</button>
+    </div>
+  </mat-card-header>
+</mat-card>

@@ -1,0 +1,24 @@
+<mat-tab-group>
+  <mat-tab *ngFor="let categorie of categories" [label]="categorie.label">
+    <mat-list>
+      <mat-list-item *ngFor="let course of getCoursesByCategorie(categorie.key)">
+        <div mat-line>{{ course.title }}</div>
+        <div mat-line> {{ course.description }} </div>
+        <div class="row">
+          <button mat-flat-button color="accent" style="margin-right: 5px;">
+            {{ course.price | currency }}
+          </button>
+          <button fxFlex mat-flat-button color="primary" *ngIf="!existCourseInShoppingCart(course.key) && !ExistCoursesById(course.key)" (click)="AddToCart(course)">
+            <i class="material-icons">add_shopping_cart</i>
+          </button>
+          <button fxFlex mat-flat-button color="warn" *ngIf="existCourseInShoppingCart(course.key) && !ExistCoursesById(course.key)" (click)="DeleteToCart(course)">
+            <i class="material-icons">delete</i>
+          </button>
+          <button fxFlex mat-flat-button color="primary" *ngIf="ExistCoursesById(course.key)" (click)="AccessCourse(course.key)">
+            <i class="material-icons">login</i>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+</mat-tab-group>
